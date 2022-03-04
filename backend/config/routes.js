@@ -8,6 +8,12 @@ module.exports = (app) => {
     .post(app.api.category.save)
     .get(app.api.category.get);
 
+  // Cuidado com a ordem!
+
+  app
+    .route("/categories/tree")
+    .get(app.api.category.getTree)
+
   app
     .route("/categories/:id")
     .put(app.api.category.save)
