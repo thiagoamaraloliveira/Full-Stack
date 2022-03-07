@@ -16,8 +16,7 @@
         <b-form-group label="Categoria Pai:" label-for="category-parentId">
           <b-form-select
             v-if="mode === 'save'"
-            id="category-parentId"
-            :readonly="mode === 'remove'"
+            id="category-parentId"           
             :options="categories"
             v-model="category.parentId"
           />
