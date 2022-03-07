@@ -2,7 +2,11 @@ module.exports = (app) => {
   const { existsOrError, notExistsOrError } = app.api.validation;
 
   const save = (req, res) => {
-    const category = { ...req.body };
+    const category = {
+      id: req.body.id,
+      name: req.body.name,
+      parentId: req.body.parentId,
+    };
     if (req.params.id) category.id = req.params.id;
 
     try {
@@ -100,16 +104,17 @@ module.exports = (app) => {
     tree = tree.map((parentNode) => {
       const isChild = (node) => node.parentId == parentNode.id;
       parentNode.children = toTree(categories, categories.filter(isChild));
-      return parentNode
+      return parentNode;
     });
-    return tree
+    return tree;
   };
 
   const getTree = (req, res) => {
-    app.db("categories")
-      .then(categories => res.json(toTree(withPath(categories))))
-      .catch(err => res.status(500).send(err))
-  }
+    app
+      .db("categories")
+      .then((categories) => res.json(toTree(withPath(categories))))
+      .catch((err) => res.status(500).send(err));
+  };
 
   return { save, remove, get, getById, getTree };
 };
