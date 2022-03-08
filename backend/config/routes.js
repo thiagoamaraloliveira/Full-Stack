@@ -28,7 +28,7 @@ module.exports = (app) => {
 
   app
     .route("/categories/tree")
-   // .all(app.config.passport.authenticate())
+    .all(app.config.passport.authenticate())
     .get(app.api.category.getTree);
 
   app
@@ -58,6 +58,6 @@ module.exports = (app) => {
 
   app
     .route("/stats")
-   // .all(app.config.passport.authenticate())
+    .all(app.config.passport.authenticate())
     .get(app.api.stat.get);
 };
